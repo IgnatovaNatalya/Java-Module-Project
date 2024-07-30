@@ -2,6 +2,8 @@ import java.util.Scanner;
 
 public class Main {
     private static final int NUM_CARS = 3;
+    private static final int MIN_SPEED = 0;
+    private static final int MAX_SPEED = 250;
 
     public static void main(String[] args) {
         // ваш код начнется здесь
@@ -12,42 +14,41 @@ public class Main {
 
         Scanner in = new Scanner(System.in);
 
-        for (int i=0; i< NUM_CARS; i++) {
-            String name="";
-            int speed =-1;
+        for (int i = 0; i < NUM_CARS; i++) {
+            String name = "";
+            int speed = -1;
 
             while (name.isEmpty()) {
-                System.out.println("— Введите название машины №" + (i+1) +":");
-                name = getName(in.nextLine());
-                if (!name.isEmpty() )  break;
+                System.out.println("— Введите название машины №" + (i + 1) + ":");
+                name = scanName(in.nextLine());
+                if (!name.isEmpty()) break;
             }
 
             while (speed == -1) {
-                System.out.println("— Введите скорость машины №" + (i+1) +":");
-                speed = getSpeed(in.nextLine());
+                System.out.println("— Введите скорость машины №" + (i + 1) + ":");
+                speed = scanSpeed(in.nextLine());
                 if (speed != -1) break;
             }
 
-            Car car = new Car(name,speed);
+            Car car = new Car(name, speed);
 
             race.compete(car);
         }
-
         race.result();
     }
 
-    public static  String getName(String str) {
-        String strName= str.trim();
-        if (strName.isEmpty() )
+    public static String scanName(String str) {
+        String strName = str.trim();
+        if (strName.isEmpty())
             System.out.println("— Название не должно быть пустым");
         return strName;
     }
 
-    public static int getSpeed(String str) {
+    public static int scanSpeed(String str) {
 
         if (str.matches("\\d+")) { //введена одна или больше цифр
             int speed = Integer.parseInt(str);
-            if (speed <0 || speed >250 ) {
+            if (speed < MIN_SPEED || speed > MAX_SPEED) {
                 System.out.println("— Неправильная скорость");
                 return -1;
             }

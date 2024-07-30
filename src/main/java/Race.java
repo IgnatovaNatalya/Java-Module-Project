@@ -6,10 +6,10 @@ public class Race {
     int distance =0; //текущая лидерская дистанция
 
     public void compete(Car car) {
-        int dist = RACE_TIME * car.speed;
+        int dist = RACE_TIME * car.getSpeed();
         if (dist > distance) {
             distance = dist;
-            leader = car.name;
+            leader = car.getName();
         }
     }
     public void result() {
